@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Similarity Checker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="noise-overlay"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">SimCheck</span>
+        <span class="logo-tag">v2.0</span>
+      </div>
+      <nav class="header-nav">
+        <span class="nav-label">JSON Similarity Analyzer</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Upload Section -->
+    <section class="upload-section" id="uploadSection">
+      <div class="upload-hero">
+        <h1 class="hero-title">
+          <span class="title-line">Similarity</span>
+          <span class="title-line accent">Intelligence</span>
+        </h1>
+        <p class="hero-sub">Upload a JSON file. We'll compute pairwise similarity using 5 state-of-the-art algorithms.</p>
+      </div>
+
+      <div class="upload-zone" id="dropZone">
+        <input type="file" id="fileInput" accept=".json" hidden />
+        <div class="upload-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 44V20M32 20L22 30M32 20L42 30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 48C8.68629 48 6 45.3137 6 42V22C6 18.6863 8.68629 16 12 16H24L32 8L40 16H52C55.3137 16 58 18.6863 58 22V42C58 45.3137 55.3137 48 52 48H12Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="upload-primary">Drop your JSON file here</p>
+        <p class="upload-secondary">or <button class="link-btn" onclick="document.getElementById('fileInput').click()">browse to upload</button></p>
+        <p class="upload-hint">Supports arrays of strings or objects with text fields</p>
+      </div>
+
+      <div class="sample-section">
+        <p class="sample-label">Try a sample:</p>
+        <div class="sample-btns">
+          <button class="sample-btn" onclick="loadSample('texts')">📝 Text Strings</button>
+          <button class="sample-btn" onclick="loadSample('assignments')">📚 DB Assignments</button>
+          <button class="sample-btn" onclick="loadSample('paragraphs')">📄 Paragraphs</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Config Section -->
+    <section class="config-section hidden" id="configSection">
+      <div class="config-header">
+        <div class="file-badge" id="fileBadge"></div>
+        <button class="reset-btn" onclick="resetApp()">↩ Upload New File</button>
+      </div>
+
+      <div class="field-selector" id="fieldSelector">
+        <h3 class="config-label">Select field to compare:</h3>
+        <div class="field-options" id="fieldOptions"></div>
+      </div>
+
+      <div class="algo-selector">
+        <h3 class="config-label">Algorithms:</h3>
+        <div class="algo-grid">
+          <label class="algo-card selected" data-algo="cosine">
+            <input type="checkbox" value="cosine" checked hidden />
+            <span class="algo-name">Cosine TF-IDF</span>
+            <span class="algo-desc">Term frequency based vector similarity</span>
+          </label>
+          <label class="algo-card selected" data-algo="jaccard">
+            <input type="checkbox" value="jaccard" checked hidden />
+            <span class="algo-name">Jaccard</span>
+            <span class="algo-desc">Intersection over union of token sets</span>
+          </label>
+          <label class="algo-card selected" data-algo="levenshtein">
+            <input type="checkbox" value="levenshtein" checked hidden />
+            <span class="algo-name">Levenshtein</span>
+            <span class="algo-desc">Normalized edit distance ratio</span>
+          </label>
+          <label class="algo-card selected" data-algo="dice">
+            <input type="checkbox" value="dice" checked hidden />
+            <span class="algo-name">Dice Coefficient</span>
+            <span class="algo-desc">Bigram overlap between sequences</span>
+          </label>
+          <label class="algo-card selected" data-algo="lcs">
+            <input type="checkbox" value="lcs" checked hidden />
+            <span class="algo-name">LCS Ratio</span>
+            <span class="algo-desc">Longest common subsequence length</span>
+          </label>
+        </div>
+      </div>
+
+      <button class="run-btn" id="runBtn" onclick="runAnalysis()">
+        <span class="run-text">Run Similarity Analysis</span>
+        <span class="run-arrow">→</span>
+      </button>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section hidden" id="resultsSection">
+      <div class="results-header">
+        <h2 class="results-title">Analysis Results</h2>
+        <div class="results-actions">
+          <button class="icon-btn" onclick="downloadCSV()" title="Export CSV">⬇ CSV</button>
+          <button class="icon-btn" onclick="resetApp()" title="New Analysis">↩ New</button>
+        </div>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-cards" id="summaryCards"></div>
+
+      <!-- Heatmap -->
+      <div class="panel heatmap-panel">
+        <h3 class="panel-title">Pairwise Similarity Heatmap <span class="panel-algo-badge" id="heatmapAlgoBadge"></span></h3>
+        <div class="heatmap-algo-selector" id="heatmapAlgoSelector"></div>
+        <div class="heatmap-wrap">
+          <div class="heatmap-grid" id="heatmapGrid"></div>
+        </div>
+      </div>
+
+      <!-- Pair Details -->
+      <div class="panel pairs-panel">
+        <h3 class="panel-title">All Pair Scores</h3>
+        <div class="pairs-filter">
+          <input type="range" id="thresholdSlider" min="0" max="100" value="0" oninput="filterPairs(this.value)" />
+          <span class="threshold-label">Show pairs ≥ <strong id="thresholdVal">0%</strong></span>
+        </div>
+        <div class="pairs-table-wrap">
+          <table class="pairs-table" id="pairsTable">
+            <thead id="pairsTableHead"></thead>
+            <tbody id="pairsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Top Matches -->
+      <div class="panel top-panel">
+        <h3 class="panel-title">Top Similar Pairs</h3>
+        <div class="top-list" id="topList"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="similarity.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
