@@ -1,0 +1,32 @@
+[
+  {
+    "student": "Alex Geo Kishore",
+    "reg_no": "24BCE5451",
+    "answer": "The ER model represents entities with attributes and relationships using cardinality constraints such as one-to-many and many-to-many. Strong entities have their own primary keys, while weak entities depend on a strong entity for identification. The ER model is converted to relational tables where each entity becomes a table and relationships are represented using foreign keys."
+  },
+  {
+    "student": "Beth Kumar",
+    "reg_no": "24BCE5452",
+    "answer": "Entity-relationship diagrams show entities, their attributes, and the cardinality of relationships between them. In the relational model conversion, entities become tables with primary keys and relationships become foreign keys. Strong entities are independent while weak entities depend on strong entities to exist."
+  },
+  {
+    "student": "Carlos Raj",
+    "reg_no": "24BCE5453",
+    "answer": "In database design, ER models use entities and relationships to model the real world. Strong entities have primary keys and weak entities rely on strong entities. The conversion to relational schema turns entities into tables and many-to-many relationships are handled using junction tables."
+  },
+  {
+    "student": "Diana Nair",
+    "reg_no": "24BCE5454",
+    "answer": "Python is a general-purpose programming language that is widely used for data science, web development, scripting, and automation. It supports object-oriented, functional, and procedural programming paradigms."
+  },
+  {
+    "student": "Eve Suresh",
+    "reg_no": "24BCE5455",
+    "answer": "Normalization ensures data integrity by eliminating redundancy in relational databases. 1NF, 2NF, and 3NF are the common normal forms. The ER model helps design a database schema by identifying entities, relationships, and constraints before converting to the relational model."
+  },
+  {
+    "student": "Frank Thomas",
+    "reg_no": "24BCE5456",
+    "answer": "ER diagrams model database schemas by identifying entities, attributes, and relationships with cardinalities. The entities are converted to relational tables, with strong entities having primary keys and weak entities having composite keys that include the foreign key from their parent entity."
+  }
+]
