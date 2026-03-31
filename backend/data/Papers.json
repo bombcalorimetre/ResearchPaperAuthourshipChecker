@@ -1,0 +1,53 @@
+{
+  "papers": [
+    {
+      "id": "PAP001",
+      "courseId": "CRS001",
+      "assignmentNumber": "DA1",
+      "title": "ER Model and Relational Schema Design",
+      "description": "Identify an online system, define its properties, draw an ER Model, and convert it to a Relational Model with minimum 5 strong and 2 weak entities.",
+      "maxScore": 10,
+      "publishThreshold": 5.0,
+      "status": "active",
+      "dueDate": "2026-02-15T23:59:00Z",
+      "createdAt": "2025-11-01T10:00:00Z",
+      "rubrics": [
+        { "criterion": "Problem statement uniqueness and description", "marks": 2 },
+        { "criterion": "ER Diagram correctness (entities, attributes, cardinalities, participation)", "marks": 5 },
+        { "criterion": "ER to Relational Model conversion correctness", "marks": 3 }
+      ]
+    },
+    {
+      "id": "PAP002",
+      "courseId": "CRS001",
+      "assignmentNumber": "DA2",
+      "title": "Normalization and SQL Queries",
+      "description": "Normalize a given schema to 3NF and write SQL queries for data retrieval and manipulation.",
+      "maxScore": 10,
+      "publishThreshold": 5.0,
+      "status": "active",
+      "dueDate": "2026-03-15T23:59:00Z",
+      "createdAt": "2025-12-01T10:00:00Z",
+      "rubrics": [
+        { "criterion": "Normalization steps and correctness", "marks": 5 },
+        { "criterion": "SQL query accuracy and completeness", "marks": 5 }
+      ]
+    },
+    {
+      "id": "PAP003",
+      "courseId": "CRS002",
+      "assignmentNumber": "DA1",
+      "title": "Graph Algorithms Analysis",
+      "description": "Implement and analyze Dijkstra and Bellman-Ford algorithms with time complexity proof.",
+      "maxScore": 10,
+      "publishThreshold": 5.0,
+      "status": "draft",
+      "dueDate": "2026-02-20T23:59:00Z",
+      "createdAt": "2025-12-10T10:00:00Z",
+      "rubrics": [
+        { "criterion": "Algorithm implementation correctness", "marks": 6 },
+        { "criterion": "Time complexity analysis", "marks": 4 }
+      ]
+    }
+  ]
+}

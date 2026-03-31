@@ -1,7 +1,6 @@
 {
-  "name": "simcheck-react",
+  "name": "simcheck-frontend",
   "version": "1.0.0",
-  "description": "JSON Similarity Checker Dashboard — React",
   "type": "module",
   "scripts": {
     "dev": "vite",
