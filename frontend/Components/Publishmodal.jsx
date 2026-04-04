@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { api } from '../utils/api'
+import { api } from '../utils/Api'
 
 export default function PublishModal({ score, filename, resultId, onClose, onPublished }) {
   const [step, setStep]   = useState('confirm')  // confirm | publishing | done | error
@@ -41,7 +41,7 @@ export default function PublishModal({ score, filename, resultId, onClose, onPub
             <p className="modal-body">
               Mean similarity score is{' '}
               <strong style={{ color: '#22c55e' }}>{score}/10</strong> — below the
-              threshold of <strong>5.0</strong>. This content is considered sufficiently
+              threshold of <strong>6.0</strong>. This content is considered sufficiently
               original and cleared for publication.
             </p>
             <p className="modal-file">{filename}</p>

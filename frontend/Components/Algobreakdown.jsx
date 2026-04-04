@@ -11,9 +11,9 @@ function AlgoRow({ algo, delay }) {
 
   const pct = (algo.raw * 100).toFixed(1)
   const color =
-    algo.raw >= 0.75 ? '#ef4444'
-    : algo.raw >= 0.5  ? '#f97316'
-    : algo.raw >= 0.3  ? '#eab308'
+    algo.raw >= 0.80 ? '#ef4444'
+    : algo.raw >= 0.60  ? '#f97316'
+    : algo.raw >= 0.30  ? '#eab308'
     : '#22c55e'
 
   return (

@@ -9,15 +9,15 @@ const GAP_OFF   = (1 - ARC_FRAC) / 2
 const ROTATION  = 90 + (1 - ARC_FRAC) * 180    // gap centred at bottom
 
 function scoreColor(s) {
-  if (s >= 7.5) return '#ef4444'
-  if (s >= 5.0) return '#f97316'
+  if (s >= 8.0) return '#ef4444'
+  if (s >= 6.0) return '#f97316'
   if (s >= 3.0) return '#eab308'
   return '#22c55e'
 }
 
 function scoreLabel(s) {
-  if (s >= 7.5) return { text: 'VERY HIGH SIMILARITY',  sub: 'Content is heavily duplicated' }
-  if (s >= 5.0) return { text: 'MODERATE SIMILARITY',   sub: 'Significant overlap detected' }
+  if (s >= 8.0) return { text: 'VERY HIGH SIMILARITY',  sub: 'Content is heavily duplicated' }
+  if (s >= 6.0) return { text: 'MODERATE SIMILARITY',   sub: 'Significant overlap detected' }
   if (s >= 3.0) return { text: 'LOW SIMILARITY',        sub: 'Minor similarities found' }
   return              { text: 'ORIGINAL CONTENT',       sub: 'Content appears sufficiently unique' }
 }

@@ -179,7 +179,7 @@ router.post('/analyze', (req, res) => {
     scores,
     meanRaw:  parseFloat(meanRaw.toFixed(4)),
     meanScore,
-    publishEligible: meanScore < 5.0,
+    publishEligible: meanScore < 6.0,
     publishedAt: null,
     status: 'analyzed',
   }
@@ -199,7 +199,7 @@ router.post('/publish/:resultId', (req, res) => {
 
   if (idx === -1)
     return res.status(404).json({ success: false, error: 'Result not found' })
-  if (!db.results[idx].publishEligible)
+  if (db.results[idx].meanScore >= 6.0)
     return res.status(403).json({ success: false, error: 'Score too high — publication blocked.' })
   if (db.results[idx].publishedAt)
     return res.status(400).json({ success: false, error: 'Already published.' })
